@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import Starter from './components/Starter/Starter';
 import './App.css';
+import { useSelector } from 'react-redux';
+import Game from './components/Game/Game';
 
 function App() {
+
+  const isInitialized = useSelector(state => state.initalization.isInitialized);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isInitialized
+        ?
+        <Game />
+        :
+        <Starter />
+      }
     </div>
   );
 }

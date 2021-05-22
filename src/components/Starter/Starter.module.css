@@ -1,0 +1,83 @@
+.wrapper{
+    background: rgb(22,237,170);
+    background: linear-gradient(176deg, rgba(22,237,170,1) 12%, rgba(56,236,222,1) 65%, rgba(0,198,255,1) 100%);
+    width: 100vw;
+    height: 100vh;
+}
+
+.formWrapper{
+    width: 30%;
+    margin: 0 auto;
+    background-color:#fff;
+    padding: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #888;
+    position: relative;
+}
+
+.input{
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 15px;
+    height: 30px;
+}
+
+.label{
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 20px;
+    position: relative;
+}
+
+.subBtn{
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #eee;
+    margin: 0 auto;
+    box-shadow: 0px 0px 5px 0px #000;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.errorBlock{
+    height: 100px;
+    line-height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color: rgba(0,0,0,.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+@media (max-width: 1200px){
+    .formWrapper{
+        width: 40%;
+    }
+}
+@media (max-width: 992px){
+    .formWrapper{
+        width: 50%;
+    }
+}
+@media (max-width: 768px){
+    .formWrapper{
+        width: 65%;
+    }
+}
+@media (max-width: 576px){
+    .subBtn{
+        width: 200px;
+    }
+}

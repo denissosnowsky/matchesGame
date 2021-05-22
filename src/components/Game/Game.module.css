@@ -1,0 +1,163 @@
+.wrapper{
+    background: rgb(22,237,170);
+    background: linear-gradient(176deg, rgba(22,237,170,1) 12%, rgba(56,236,222,1) 65%, rgba(0,198,255,1) 100%);
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.display{
+    display: grid;
+    grid-template-rows: 5fr 5fr;
+    height: 80%;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #888;
+    text-align: center;
+}
+
+.board{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.me{
+    display: grid;
+    grid-template-rows: 3fr 3fr 2fr;
+    align-items: center;
+}
+
+.table{
+    display: grid;
+    grid-template-rows: 5fr 2fr;
+    align-items: center;
+}
+
+.left{
+    font-size: 90px;
+}
+
+.comp{
+    display: grid;
+    grid-template-rows: 3fr 3fr 2fr;
+    align-items: center;
+}
+
+.photo{
+    font-size: 70px;
+}
+
+.name{
+    font-size: 35px;
+    align-self: start;
+}
+
+.account{
+    font-size: 70px;
+}
+
+.btnWrp{
+    position: relative;
+}
+
+.btn{
+    height: 60px;
+    width: 300px;
+    background-color: red;
+    line-height: 60px;
+    font-size: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #888;
+    background-color: #fff;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.inputHit{
+    height: 40px;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 20px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0px 0px 5px 0px #888;
+}
+
+.menu{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.winner{
+    height: 100px;
+    line-height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color: rgba(0,0,0,.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.errorBlock{
+    height: 100px;
+    line-height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color: rgba(0,0,0,.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+@media (max-width: 768px){
+    .name{
+        font-size: 25px;
+    }
+}
+@media (max-width: 576px){
+    .display{
+        width: 95%
+    }
+    .inputHit{
+        width: 280px;
+        font-size: 20px;
+        border-radius: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .photo{
+        font-size: 50px;
+    }
+    .btn{
+        width: 280px;
+    }
+    .name{
+        font-size: 17px;
+    }
+    .left{
+        font-size: 70px;
+    }
+}
