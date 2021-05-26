@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import TextInput from '../TextInput/TextInput';
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeThunk, setErrorAC } from '../../redux/initializeReducer';
+import * as Yup from 'yup';
 
 
 const Starter = () => {
@@ -18,45 +19,33 @@ const Starter = () => {
                         n: '',
                         m: ''
                     }}
+                    validationSchema={Yup.object({
+                        n: Yup.string()
+                            .matches(/^\d*[13579]$/, "Введите нечетное число")
+                            .min(1,'Числа должны быть больше нуля')
+                            .required('Введите все числа'),
+                        m: Yup.number()
+                            .typeError('Введите числа')
+                            .lessThan(
+                                Yup.ref("n"),
+                                "Введите правильные числа"
+                            )
+                            .min(1,'Числа должны быть больше нуля')
+                            .required('Введите все числа'),
+                    })}
                     onSubmit={(values) => {
-                        if(+values.n.length === 0 || +values.m.length === 0){
-                            dispatch(setErrorAC('Введите все числа'));
-                            setTimeout(()=>{
-                                dispatch(setErrorAC(null));
-                            },2000);
-                        }else if(!/(?=^\d+$)/.test(+values.m) || !/(?=^\d+$)/.test(+values.n)){
-                            dispatch(setErrorAC('Введите числа'));
-                            setTimeout(()=>{
-                                dispatch(setErrorAC(null));
-                            },2000);
-                        }else if(+values.m >= +values.n){
-                            dispatch(setErrorAC('Число всех спичек должно быть больше'));
-                            setTimeout(()=>{
-                                dispatch(setErrorAC(null));
-                            },2000);
-                        }else if(+values.n % 2 === 0){
-                            dispatch(setErrorAC('Число всех спичек должно быть нечетное'));
-                            setTimeout(()=>{
-                                dispatch(setErrorAC(null));
-                            },2000);
-                        }else if(+values.n <= 0 || +values.m <= 0){
-                            dispatch(setErrorAC('Числа должны быть больше нуля'));
-                            setTimeout(()=>{
-                                dispatch(setErrorAC(null));
-                            },2000);
-                        }else{
-                            dispatch(initializeThunk(+values.n, +values.m));
-                        }
+                        dispatch(initializeThunk(+values.n, +values.m));
                     }}
                 >
                     <Form>
                         <TextInput
                             label="Введите нечетное число всех спичек:"
-                            placeholder="Введите здесь..."
                             name="n"
                             type="text"
+                            placeholder="Введите здесь..."
                             inputClass={s.input}
                             labelClass={s.label}
+                            setErrorAC={setErrorAC}
                         />
                         <TextInput
                             label="Введите максимум спичек взять за раз:"
@@ -65,6 +54,7 @@ const Starter = () => {
                             placeholder="Введите здесь..."
                             inputClass={s.input}
                             labelClass={s.label}
+                            setErrorAC={setErrorAC}
                         />
                         <button type="submit" className={s.subBtn}>Начать играть!</button>
                     </Form>

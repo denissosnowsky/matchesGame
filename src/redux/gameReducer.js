@@ -6,8 +6,6 @@ const SET_MATHCES = 'SET_MATHCES';
 const MAKE_STEP = 'MAKE_STEP';
 const SET_WINNER = 'SET_WINNER';
 const RESET_GAME = 'RESET_GAME';
-const COMP_FIRST = 'COMP_FIRST';
-const SET_USER_FIRST = 'SET_USER_FIRST';
 
 
 const initialState = {
@@ -15,18 +13,27 @@ const initialState = {
     computerAccount: 0,
     matches: 0,
     isChosen: false,
-    isUserFirst: true,
     winner: null
 };
 
 const gameReducer = (state = initialState, action) => {
     switch(action.type){
-        case SET_CHOSEN:
-            return {
-                ...state,
-                isChosen: action.isChosen,
-                isUserFirst: action.isUserFirst
-            }
+        case SET_CHOSEN:{
+            let step = Math.floor(Math.random() * action.maxTake)+1;
+            if(action.isUserFirst){
+                return {
+                    ...state,
+                    isChosen: action.isChosen,
+                };
+            }else{
+                return{
+                    ...state,
+                    isChosen: action.isChosen,
+                    computerAccount: +step,
+                    matches: state.matches - step 
+                }
+            };
+        }
         case SET_MATHCES:
             return{
                 ...state,
@@ -54,31 +61,10 @@ const gameReducer = (state = initialState, action) => {
                 isUserFirst: true,
                 winner: null
             }
-        case COMP_FIRST:{
-            let step = Math.floor(Math.random() * action.maxTake)+1; //there are no winning step at the beginnig, so computer makes random choice
-            return{
-                ...state,
-                computerAccount: +step,
-                matches: state.matches - step 
-            };
-        }
-        case SET_USER_FIRST:
-            return{
-                ...state,
-                isUserFirst: true
-            }
         default: 
             return state;
     }
 };
-
-export const compFirstAC = (maxTake) => ({
-    type: COMP_FIRST, maxTake
-});
-
-export const setUserFirst = () => ({
-    type: SET_USER_FIRST
-});
 
 
 export const resetGameAC = () => ({
@@ -97,8 +83,8 @@ export const setMatchesAC = (matches) => ({
     type: SET_MATHCES, matches
 });
 
-export const isChosenAC = (isChosen, isUserFirst) => ({
-   type: SET_CHOSEN, isChosen, isUserFirst
+export const isChosenAC = (isChosen, isUserFirst, maxTake) => ({
+   type: SET_CHOSEN, isChosen, isUserFirst, maxTake
 });
 
 export const makeStepThunk = (number, computerAccount, userAccount, matches, computerSteps, m) => (dispatch) => {

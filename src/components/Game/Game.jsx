@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { compFirstAC, makeStepThunk, resetGameAC, setUserFirst } from '../../redux/gameReducer';
+import { makeStepThunk, resetGameAC } from '../../redux/gameReducer';
 import { resetInitializationAC } from '../../redux/initializeReducer';
 import Choice from '../Choice/Choice';
 import s from './Game.module.css';
@@ -15,21 +15,25 @@ const Game = () => {
     const isChosenFirstPlayer = useSelector(state => state.game.isChosen);
     const computerSteps = useSelector(state => state.initalization.computerSteps);
     const winner = useSelector(state => state.game.winner);
-    const isUserFirst = useSelector(state => state.game.isUserFirst);
     const error = useSelector(state => state.initalization.error)
     const dispatch = useDispatch();
     
     const [takenStep, setTakenStep] = useState('');
 
+    const inputValidate = (e) => {
+        if(isNaN(e.target.value)){
+            setTakenStep(e.target.value);
+        }else if(e.target.value.length === 0){
+            setTakenStep('');
+        } else {
+            setTakenStep(+e.target.value);
+        }
+    };
+
     if(!isChosenFirstPlayer){
         return <Choice />
     }
     
-    if(!isUserFirst){
-        dispatch(setUserFirst());
-        dispatch(compFirstAC(maxTake));
-    }
-
     return(
         <div className={s.wrapper}>
             <div className={s.display}>
@@ -51,16 +55,16 @@ const Game = () => {
                 </div>
                 <div className={s.menu}>
                     <div className={s.btnWrp}>
-                        <input value={takenStep} onChange={(e)=>setTakenStep(e.target.value)} className={s.inputHit} name='step' type='text' placeholder='Сколько спичек взять?'/>
+                        <input value={takenStep} onChange={inputValidate} className={s.inputHit} name='step' type='text' placeholder='Сколько спичек взять?'/>
                     </div>
                     <div className={s.btnWrp}>
                         <div className={s.btn} onClick={()=>dispatch(makeStepThunk(
-                            +takenStep,
-                            +computerAccount, 
-                            +userAccount, 
-                            +matches, 
+                            takenStep,
+                            computerAccount, 
+                            userAccount, 
+                            matches, 
                             computerSteps,
-                            +maxTake
+                            maxTake
                         ))}>Сделать ход!</div>
                     </div>
                     <div className={s.btnWrp}>

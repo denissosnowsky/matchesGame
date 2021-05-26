@@ -20,8 +20,8 @@ const initalizationScript = (n, m) => {
     //The while cycle below initialize the algorithm for the computer how to play a game
     while(computerSteps.length < n+1){
         let stepArray = []; //consists of two objects for this step 
-        let evenObject = {e: true, l: l}; // object when the computer account lefover is even
-        let oddObject = {e: false, l: l}; // object when the computer accoutn lefover is odd
+        let evenObject = {e: true, l: l, c: false, s: 1}; // object when the computer account leftover is even
+        let oddObject = {e: false, l: l, c: false, s: 1}; // object when the computer accoutn leftover is odd
     
         if(l % 2 === 0){
             for (let i = 1; i<=m; i++){
@@ -31,10 +31,6 @@ const initalizationScript = (n, m) => {
                     break;
                 }
             }
-            if(evenObject.c !== true){
-                evenObject.c = false;
-                evenObject.s = 1;
-            }
             for (let i = 1; i<=m; i++){
                 if(computerSteps[computerSteps.length-i] && !computerSteps[computerSteps.length-i][0].c){
                     oddObject.c = true;
@@ -42,10 +38,6 @@ const initalizationScript = (n, m) => {
                     break;
                 }
             }
-            if(oddObject.c !== true){
-                oddObject.c = false;
-                oddObject.s = 1;
-            };
         };
     
         if(l%2 === 1){
@@ -56,10 +48,6 @@ const initalizationScript = (n, m) => {
                     break;
                 }
             }
-            if(evenObject.c !== true){
-                evenObject.c = false;
-                evenObject.s = 1;
-            }
             for (let i = 1; i<=m; i++){
                 if(computerSteps[computerSteps.length-i] && !computerSteps[computerSteps.length-i][1].c){
                     oddObject.c = true;
@@ -67,10 +55,6 @@ const initalizationScript = (n, m) => {
                     break;
                 }
             }
-            if(oddObject.c !== true){
-                oddObject.c = false;
-                oddObject.s = 1;
-            };
         };
     
         stepArray[0] = evenObject;
